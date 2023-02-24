@@ -19,4 +19,12 @@ public class MoneyGenerator {
         }
         return cost;
     }
+
+    public  EnhancedInVoice calculateFareDescription(Ride[] rides) {
+        double cost = 0;
+        for (Ride ride : rides) {
+            cost = cost + this.travelCost(ride.distance, ride.time);
+        }
+        return new EnhancedInVoice(rides.length, cost, avgFare);
+	}
 }
