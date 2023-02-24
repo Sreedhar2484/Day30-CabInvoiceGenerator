@@ -38,4 +38,22 @@ public class MoneyGeneratorTest {
         double fare = invoiceGenerator.calculateFareForMultipleRides(rides);
         Assert.assertEquals(225.0, fare, 0);
     }
+
+    @Test
+    public void givenMultipleRides_shouldReturn_invoiceSummary() {
+        Ride[] rides = { new Ride(2.0, 5), new Ride(0.1, 1) };
+        EnhancedInVoice actualDescription = invoiceGenerator.calculateFareDescription(rides);
+        EnhancedInVoice expectedDescription = new EnhancedInVoice(2, 30.0, 2.0);
+        Assert.assertEquals(expectedDescription, actualDescription);
+    }
+
+    @Test
+    public void givenUserId_shouldReturn_invoiceDescriptionList() {
+        String userId = "abc@gmail.com";
+        Ride[] rides = { new Ride(2.0, 5), new Ride(0.1, 1) };
+        invoiceGenerator.addRides(userId, rides);
+        EnhancedInVoice actualDescription = invoiceGenerator.getInvoiceDescription(userId);
+        EnhancedInVoice expectedDescription = new EnhancedInVoice(2, 30.0, 2.0);
+        Assert.assertEquals(expectedDescription, actualDescription);
+    }
 }
