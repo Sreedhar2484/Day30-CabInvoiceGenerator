@@ -1,5 +1,7 @@
 package com.bridgelabz.cabInvoiceGenerator;
+
 import org.junit.*;
+
 public class MoneyGeneratorTest {
 
     MoneyGenerator invoiceGenerator = new MoneyGenerator();
@@ -19,7 +21,7 @@ public class MoneyGeneratorTest {
         double distance = 2.0;
         double time = 5.0;
         double fare = invoiceGenerator.travelCost(distance, time);
-        Assert.assertEquals(25.0, fare, 0.0);
+        Assert.assertEquals(25.0, fare, 0);
     }
 
     @Test
@@ -27,6 +29,13 @@ public class MoneyGeneratorTest {
         double distance = 0.1;
         double time = 1;
         double fare = invoiceGenerator.travelCost(distance, time);
-        Assert.assertEquals(5, fare, 0.0);
+        Assert.assertEquals(5, fare, 0);
+    }
+
+    @Test
+    public void givenMultipleRides_shouldReturn_invoiceCost() {
+        Ride[] rides = { new Ride(4, 25), new Ride(10, 60) };
+        double fare = invoiceGenerator.calculateFareForMultipleRides(rides);
+        Assert.assertEquals(225.0, fare, 0);
     }
 }
